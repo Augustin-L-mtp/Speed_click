@@ -26,14 +26,27 @@ public class Grille_SP {
     }
     
     public void allumerUnBoutonRandom(){ //cette methode allume un bouton au hasard
-        int a; int b; 
+        int a; int b; int c;
         Random alea = new Random(); 
         a = alea.nextInt(7); // la variable a va contenir un nombre aleatoire entre 0 et 6 
         b = alea.nextInt(7); // la variable b va contenir un nombre aleatoire entre 0 et 6 
         GrilleJeu[a][b].allumerUnBouton(); // on appelle la methode pour allumer le bouton correspondant à la case [a][b]
         // la variable estAllume va donc passer de fals a true 
+        GrilleJeu[a][b].colorationBouton("stormtrooper");
         
-        //GrilleJeu[a][b].colorationBouton();
+        c = alea.nextInt(3); // tirage d'un chiffre entre 0 et 4 
+        
+        if (c == 1) {  // si ce chiffre est 3 on va faire apparaitre un bouton piège (Maitre vador est trop puissant)
+            int x = alea.nextInt(7);
+            int y = alea.nextInt(7);
+            while (GrilleJeu[a][b] == GrilleJeu[x][y]) {
+                x = alea.nextInt(7);
+                y = alea.nextInt(7);
+            }
+            GrilleJeu[x][y].allumerUnBouton();
+            GrilleJeu[x][y].colorationBouton("vador");
+        }
+        
         
 
     }

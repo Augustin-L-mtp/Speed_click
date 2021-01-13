@@ -31,8 +31,8 @@ public class Bouton_SP {
        
     }
     
-    public void colorationBouton() { 
-        Couleur = "vert";
+    public void colorationBouton(String typeJeton) { 
+        Couleur = typeJeton;
     }
     
 }

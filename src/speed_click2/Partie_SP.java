@@ -18,6 +18,7 @@ public class Partie_SP {
     String nomJoueur;
     Timer chrono = new Timer();
     
+    
     public Partie_SP() {
         compteur = 0;
     }

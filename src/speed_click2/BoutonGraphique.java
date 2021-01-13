@@ -15,8 +15,12 @@ import javax.swing.JButton;
  */
 public class BoutonGraphique extends JButton{
     Bouton_SP boutonAssocie;
-    ImageIcon img_vide = new javax.swing.ImageIcon(getClass().getResource("/image/Bouton_Vide.png"));
-    
+    ImageIcon img_vide = new javax.swing.ImageIcon(getClass().getResource("/Images/Bouton_Vide.png"));
+    ImageIcon img_luke = new javax.swing.ImageIcon(getClass().getResource("/Images/Bouton_Luke.png"));
+    ImageIcon img_vador = new javax.swing.ImageIcon(getClass().getResource("/Images/Bouton_Vador.png"));
+    ImageIcon img_yoda = new javax.swing.ImageIcon(getClass().getResource("/Images/Bouton_Yoda.png"));
+    ImageIcon img_stormtrooper = new javax.swing.ImageIcon(getClass().getResource("/Images/Bouton_Stormtrooper.png"));
+
 
 
     public BoutonGraphique (Bouton_SP unBouton) {
@@ -26,8 +30,19 @@ public class BoutonGraphique extends JButton{
     @Override
     public void paintComponent(Graphics G) {
         super.paintComponent(G);
-        setIcon(img_vide); // on attribut l'image Bouton_vide
+        if (boutonAssocie.estAllume == true) {
+            
+            if (boutonAssocie.Couleur.equals("stormtrooper")) {
+                setIcon(img_stormtrooper); // il faudra cliquer sur les boutons luke skywalker pour le le click normal 
+            }
+            
+            else if (boutonAssocie.Couleur.equals("vador"))
+                setIcon(img_vador);
+            }
         
+        else {
+        setIcon(img_vide); // on attribut l'image Bouton_vide
+        }
     }
     
 
