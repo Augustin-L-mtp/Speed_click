@@ -27,9 +27,9 @@ public class FenetreDeJeu extends javax.swing.JFrame {
     int compteur = 0;
     Grille_SP GrilleBouton = new Grille_SP();
     String nomJoueur;
-    Timer timer;
+    //Timer timer;
     JLabel counterLabel;
-    int tempsRestant = 30;
+    int tempsRestant = 15;
     boolean click = false;
 
     public FenetreDeJeu() {
@@ -65,16 +65,18 @@ public class FenetreDeJeu extends javax.swing.JFrame {
                             zone_text.setText("un stormtrooper de moins");
                             b.eteindreUnBouton();
                             click = true;
+                            compteur++;
+                            nombre_click.setText(compteur + "");
                             
                             
                             for (int i = 0; i < 7; i++) {
                                 for (int j = 0; j < 7; j++) {
-                                    if (GrilleBouton.GrilleJeu[i][j].Couleur.equals("vador")) {
+                                    if (GrilleBouton.GrilleJeu[i][j].Couleur.equals("vador") || GrilleBouton.GrilleJeu[i][j].Couleur.equals("luke")) {
                                         GrilleBouton.GrilleJeu[i][j].eteindreUnBouton();
-                                        System.out.println("oui");
                                     }
                                 }
                             }
+                            
                             jouer();
                         }
                         
@@ -83,9 +85,32 @@ public class FenetreDeJeu extends javax.swing.JFrame {
                             b.eteindreUnBouton();
                             compteur--;
                             nombre_click.setText(compteur + "");
-                            
+                                                       
+                            for (int i = 0; i < 7; i++) {
+                                for (int j = 0; j < 7; j++) {
+                                    if (GrilleBouton.GrilleJeu[i][j].Couleur.equals("stormtrooper") || GrilleBouton.GrilleJeu[i][j].Couleur.equals("luke")) {
+                                        GrilleBouton.GrilleJeu[i][j].eteindreUnBouton();
+                                    }
+                                }
+                            }
+                            jouer();
                         }
                         
+                        else if (b.Couleur.equals("luke") ) {
+                            zone_text.setText("Jamais je ne viendrais du coté obscur"); 
+                            b.eteindreUnBouton();
+                            compteur = compteur + 2;
+                            nombre_click.setText(compteur + "");
+                            panneau_grille.repaint();
+                            for (int i = 0; i < 7; i++) {
+                                for (int j = 0; j < 7; j++) {
+                                    if (GrilleBouton.GrilleJeu[i][j].Couleur.equals("stormtrooper") || GrilleBouton.GrilleJeu[i][j].Couleur.equals("vador")) {
+                                        GrilleBouton.GrilleJeu[i][j].eteindreUnBouton();
+                                    }
+                                }
+                            }
+                            jouer();
+                        }
 
                     }
 
@@ -271,7 +296,7 @@ public class FenetreDeJeu extends javax.swing.JFrame {
 
         getContentPane().add(panneau_joueur, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 50, 310, 150));
 
-        panneau_score.setBackground(new java.awt.Color(255, 255, 51));
+        panneau_score.setBackground(new java.awt.Color(204, 255, 204));
 
         jlabel_infoJeu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jlabel_infoJeu.setText("Infos Jeu :");
@@ -319,7 +344,7 @@ public class FenetreDeJeu extends javax.swing.JFrame {
 
         getContentPane().add(panneau_score, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 430, 310, 220));
 
-        panneau_timer.setBackground(new java.awt.Color(204, 204, 255));
+        panneau_timer.setBackground(new java.awt.Color(204, 255, 204));
 
         jlabel_tpsRestant.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jlabel_tpsRestant.setText("Temps restant :");
@@ -381,6 +406,8 @@ public class FenetreDeJeu extends javax.swing.JFrame {
         panneau_grille.setVisible(true);
         bouton_start.setEnabled(false);
         panneau_grille.repaint();
+        case_temps.setText(tempsRestant + "");
+        timer.start();
 
     }//GEN-LAST:event_bouton_startActionPerformed
 
@@ -397,10 +424,8 @@ public class FenetreDeJeu extends javax.swing.JFrame {
         
         texte_regle.setFont(new Font("Serif",Font.BOLD,25));
         texte_regle.setForeground(Color.YELLOW);
-        texte_regle.setText("Bonjour jeune Padawan," +'\n'+'\n'+ "L'empire est plus puissant que jamais,\nIl a construit une nouvelle station spatiale appelée Etoile de la mort\nTa mission est d'aider les armées de l'Alliance à combattre les forces du mal\n\nUtilise ta souris laser pour dézinguer les Stormtrooper\nAttention, ne combat pas Vador tout seul ou tu le regretteras\nPendant le combat, utilise l'aide que maître Luke et maître Yoda t'apporterons\nLuke te donnera de la force pour tuer plus de Stormtrooper\nYoda te fera gagner du temps, mais il sera énigmatique, comme toujours...\n\n\nVoici le message que maître Yoda m'a demandé de te transmettre :\n\nUne grande confiance en toi je perçois,\nMais, faire attention au côté obscur tu dois\nLa peur est le chemin vers le côté obscur : \nla peur mène à la colère, la colère mène à la haine, la haine … mène à la souffrance\nA tes intuitions te fier, il faut.\n\n\nQue la force soit avec toi jeune Padawan");
-        //texte_regle.setText("\nL'empire est plus puissant que jamais, et à construit une nouvelle station spatiale : Etoile de la mort ");
-        //texte_regle.setText("\nTa mission est d'aider les armées de l'Alliance à combattre les forces du mal"); 
-
+        texte_regle.setText("Bonjour jeune Padawan," +'\n'+'\n'+ "L'empire est plus puissant que jamais,\nIl a construit une nouvelle station spatiale appelée Etoile de la mort\nTa mission est d'aider les armées de l'Alliance à combattre les forces du mal\n\nUtilise ta souris laser pour dézinguer les Stormtroopers\nAttention, ne combat pas Vador tout seul ou tu le regretteras\nPendant le combat, utilise l'aide que maître Luke et maître Yoda t'apporteront\nLuke te donnera de la force pour tuer plus de Stormtrooper\nYoda te fera gagner du temps, mais il sera énigmatique, comme toujours...\n\n\nVoici le message que maître Yoda m'a demandé de te transmettre :\n\nUne grande confiance en toi je perçois,\nMais, faire attention au côté obscur tu dois\nLa peur est le chemin vers le côté obscur : \nla peur mène à la colère, la colère mène à la haine, la haine … mène à la souffrance\nA tes intuitions te fier, il faut.\n\n\nQue la force soit avec toi jeune Padawan");
+        
     }//GEN-LAST:event_bouton_gifActionPerformed
 
     private void bouton_regleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_regleActionPerformed
@@ -461,32 +486,41 @@ public class FenetreDeJeu extends javax.swing.JFrame {
     }
 
     public void jouer() {
-        compteur++;
-        nombre_click.setText(compteur + "");
+        
+        
+        
         GrilleBouton.allumerUnBoutonRandom();
         panneau_grille.repaint();
-
     }
 
     
 
 
-    /*public void timer() {
-        timer = new Timer(1000, new ActionListener() {
+        Timer timer = new Timer(1000, new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e) {
                 tempsRestant--;
+
+                if (tempsRestant >= 0) {
+                case_temps.setText(tempsRestant + "");
+                }
+                
+                if (tempsRestant == 0) {
+                    for (int i = 0; i < 7; i++) {
+                        for (int j = 0; j < 7; j++) {
+                            GrilleBouton.GrilleJeu[i][j].eteindreUnBouton();  
+                            panneau_grille.repaint();
+                            timer.stop();
+                        }
+                    }
+                }
             }
-            
-            if (tempsRestant >= 0) {
-            case_temps.setText(tempsRestant + "");
-        }
         });
         
-    }*/
+    
     
     public void allumerUnBoutonRandom(){ //cette methode allume un bouton au hasard
-        int a; int b; int c;
+        int a; int b; int c; int d;
         Random alea = new Random(); 
         a = alea.nextInt(7); // la variable a va contenir un nombre aleatoire entre 0 et 6 
         b = alea.nextInt(7); // la variable b va contenir un nombre aleatoire entre 0 et 6 
@@ -503,6 +537,18 @@ public class FenetreDeJeu extends javax.swing.JFrame {
             }
             GrilleBouton.GrilleJeu[x][y].allumerUnBouton();
             GrilleBouton.GrilleJeu[x][y].colorationBouton("vador");
+        }
+        
+        d = alea.nextInt(4);
+        if (d == 2) {  // si ce chiffre est 2 on va faire apparaitre un bouton bonus (Maitre luke va nous régaler)
+            int p = alea.nextInt(7);
+            int q = alea.nextInt(7);
+            while (GrilleBouton.GrilleJeu[a][b] == GrilleBouton.GrilleJeu[p][q]) {
+                p = alea.nextInt(7);
+                q = alea.nextInt(7);
+            }
+            GrilleBouton.GrilleJeu[p][q].allumerUnBouton();
+            GrilleBouton.GrilleJeu[p][q].colorationBouton("luke");
         }
     }
     

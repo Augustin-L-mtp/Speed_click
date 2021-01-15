@@ -12,7 +12,7 @@ import javax.swing.JButton;
 /**
  *
  * @author augus
- */
+     */
 public class BoutonGraphique extends JButton{
     Bouton_SP boutonAssocie;
     ImageIcon img_vide = new javax.swing.ImageIcon(getClass().getResource("/Images/Bouton_Vide.png"));
@@ -38,6 +38,10 @@ public class BoutonGraphique extends JButton{
             
             else if (boutonAssocie.Couleur.equals("vador"))
                 setIcon(img_vador);
+            
+            
+            else if (boutonAssocie.Couleur.equals("luke"))
+                setIcon(img_luke);
             }
         
         else {
