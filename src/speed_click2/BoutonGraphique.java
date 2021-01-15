@@ -42,6 +42,9 @@ public class BoutonGraphique extends JButton{
             
             else if (boutonAssocie.Couleur.equals("luke"))
                 setIcon(img_luke);
+            
+            else if (boutonAssocie.Couleur.equals("yoda"))
+                setIcon(img_yoda);
             }
         
         else {

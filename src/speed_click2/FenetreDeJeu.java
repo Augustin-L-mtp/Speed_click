@@ -48,6 +48,7 @@ public class FenetreDeJeu extends javax.swing.JFrame {
         panneau_timer.setVisible(false);
         panneau_score.setVisible(false);
         panneau_grille.setVisible(false);
+        panneau_yoda.setVisible(false);
 
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
@@ -111,6 +112,18 @@ public class FenetreDeJeu extends javax.swing.JFrame {
                             }
                             jouer();
                         }
+                        else if (b.Couleur.equals("yoda") ) {
+                            zone_text.setText("Jamais je ne viendrais du coté obscur"); 
+                            b.eteindreUnBouton();
+                            timer.stop();
+                            panneau_yoda.setVisible(false);
+                            Random alea = new Random(); 
+                            int x = alea.nextInt(4);
+                            switch (x) {
+                                case 1:
+                                    Jtext_yoda.setText("Comment s'appelle maître de Obi-Wan Kenobi\n\nRéponse 1 : Maître Windu\nRéponse 2 : Maître qui-Gon Jy");
+                            }
+                        }
 
                     }
 
@@ -130,6 +143,10 @@ public class FenetreDeJeu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panneau_yoda = new javax.swing.JPanel();
+        javax.swing.JButton bouton_reponse2 = new javax.swing.JButton();
+        bouton_reponse1 = new javax.swing.JButton();
+        Jtext_yoda = new javax.swing.JTextArea();
         panneau_regle = new javax.swing.JPanel();
         bouton_regle = new javax.swing.JButton();
         texte_regle = new javax.swing.JTextArea();
@@ -157,6 +174,51 @@ public class FenetreDeJeu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        bouton_reponse2.setText("Réponse 2");
+
+        bouton_reponse1.setText("Réponse 1 ");
+        bouton_reponse1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bouton_reponse1ActionPerformed(evt);
+            }
+        });
+
+        Jtext_yoda.setColumns(20);
+        Jtext_yoda.setRows(5);
+
+        javax.swing.GroupLayout panneau_yodaLayout = new javax.swing.GroupLayout(panneau_yoda);
+        panneau_yoda.setLayout(panneau_yodaLayout);
+        panneau_yodaLayout.setHorizontalGroup(
+            panneau_yodaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panneau_yodaLayout.createSequentialGroup()
+                .addContainerGap(370, Short.MAX_VALUE)
+                .addComponent(bouton_reponse1)
+                .addGap(235, 235, 235)
+                .addComponent(bouton_reponse2)
+                .addGap(363, 363, 363))
+            .addGroup(panneau_yodaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panneau_yodaLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(Jtext_yoda, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        panneau_yodaLayout.setVerticalGroup(
+            panneau_yodaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panneau_yodaLayout.createSequentialGroup()
+                .addContainerGap(687, Short.MAX_VALUE)
+                .addGroup(panneau_yodaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bouton_reponse2)
+                    .addComponent(bouton_reponse1))
+                .addGap(40, 40, 40))
+            .addGroup(panneau_yodaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panneau_yodaLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(Jtext_yoda, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        getContentPane().add(panneau_yoda, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1140, 750));
 
         panneau_regle.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -438,6 +500,10 @@ public class FenetreDeJeu extends javax.swing.JFrame {
 // TODO add your handling code here:
     }//GEN-LAST:event_bouton_regleActionPerformed
 
+    private void bouton_reponse1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_reponse1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bouton_reponse1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -520,7 +586,7 @@ public class FenetreDeJeu extends javax.swing.JFrame {
     
     
     public void allumerUnBoutonRandom(){ //cette methode allume un bouton au hasard
-        int a; int b; int c; int d;
+        int a; int b; int c; int d; int e;
         Random alea = new Random(); 
         a = alea.nextInt(7); // la variable a va contenir un nombre aleatoire entre 0 et 6 
         b = alea.nextInt(7); // la variable b va contenir un nombre aleatoire entre 0 et 6 
@@ -531,7 +597,7 @@ public class FenetreDeJeu extends javax.swing.JFrame {
         if (c == 1) {  // si ce chiffre est 3 on va faire apparaitre un bouton piège (Maitre vador est trop puissant)
             int x = alea.nextInt(7);
             int y = alea.nextInt(7);
-            while (GrilleBouton.GrilleJeu[a][b] == GrilleBouton.GrilleJeu[x][y]) {
+            while (GrilleBouton.GrilleJeu[x][y] == GrilleBouton.GrilleJeu[a][b]) { // on vérifie qu'on allume pas deux fois le meme bouton
                 x = alea.nextInt(7);
                 y = alea.nextInt(7);
             }
@@ -543,18 +609,31 @@ public class FenetreDeJeu extends javax.swing.JFrame {
         if (d == 2) {  // si ce chiffre est 2 on va faire apparaitre un bouton bonus (Maitre luke va nous régaler)
             int p = alea.nextInt(7);
             int q = alea.nextInt(7);
-            while (GrilleBouton.GrilleJeu[a][b] == GrilleBouton.GrilleJeu[p][q]) {
+            while (GrilleBouton.GrilleJeu[p][q] == GrilleBouton.GrilleJeu[a][b]) {
                 p = alea.nextInt(7);
                 q = alea.nextInt(7);
             }
             GrilleBouton.GrilleJeu[p][q].allumerUnBouton();
             GrilleBouton.GrilleJeu[p][q].colorationBouton("luke");
         }
+        e = alea.nextInt(3);
+        if (e == 2) {  // si ce chiffre est 2 on va faire apparaitre un bouton bonus (Maitre luke va nous régaler)
+            int v = alea.nextInt(7);
+            int w = alea.nextInt(7);
+            while (GrilleBouton.GrilleJeu[a][b] == GrilleBouton.GrilleJeu[v][w]) {
+                v = alea.nextInt(7);
+                w = alea.nextInt(7);
+            }
+            GrilleBouton.GrilleJeu[v][w].allumerUnBouton();
+            GrilleBouton.GrilleJeu[v][w].colorationBouton("yoda");
+        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea Jtext_yoda;
     private javax.swing.JButton bouton_gif;
     private javax.swing.JButton bouton_regle;
+    private javax.swing.JButton bouton_reponse1;
     private javax.swing.JButton bouton_start;
     private javax.swing.JLabel case_temps;
     private javax.swing.JLabel gif1;
@@ -575,6 +654,7 @@ public class FenetreDeJeu extends javax.swing.JFrame {
     private javax.swing.JPanel panneau_regle;
     private javax.swing.JPanel panneau_score;
     private javax.swing.JPanel panneau_timer;
+    private javax.swing.JPanel panneau_yoda;
     private javax.swing.JTextArea texte_regle;
     private javax.swing.JTextArea zone_text;
     // End of variables declaration//GEN-END:variables

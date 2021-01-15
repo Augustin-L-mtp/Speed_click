@@ -26,7 +26,7 @@ public class Grille_SP {
     }
     
     public void allumerUnBoutonRandom(){ //cette methode allume un bouton au hasard
-        int a; int b; int c; int d;
+        int a; int b; int c; int d; int e;
         Random alea = new Random(); 
         a = alea.nextInt(7); // la variable a va contenir un nombre aleatoire entre 0 et 6 
         b = alea.nextInt(7); // la variable b va contenir un nombre aleatoire entre 0 et 6 
@@ -57,6 +57,18 @@ public class Grille_SP {
             }
             GrilleJeu[p][q].allumerUnBouton();
             GrilleJeu[p][q].colorationBouton("luke");
+        }
+        
+        e = alea.nextInt(3);
+        if (e == 2) {  // si ce chiffre est 2 on va faire apparaitre un bouton bonus (Maitre luke va nous régaler)
+            int v = alea.nextInt(7);
+            int w = alea.nextInt(7);
+            while (GrilleJeu[a][b] == GrilleJeu[v][w]) {
+                v = alea.nextInt(7);
+                w = alea.nextInt(7);
+            }
+            GrilleJeu[v][w].allumerUnBouton();
+            GrilleJeu[v][w].colorationBouton("yoda");
         }
         
 
